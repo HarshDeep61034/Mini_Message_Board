@@ -4,28 +4,92 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>HOME</title>
+	<title>Home</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
+<style>
+	* {
+		padding: 0;
+		margin: 0;
+		overflow-x: hidden;
+	}
+
+	nav {
+		width: 100vw;
+		height: 12vh;
+		background-color: #0284c7;
+		color: white;
+		font-size: 22px;
+		display: flex;
+		align-items: center;
+		padding-left: 25px;
+		position: fixed;
+	}
+
+	.input-form {
+		position: fixed;
+		bottom: 12px;
+	}
+
+	.msgs {
+		margin-top: 40px;
+		overflow-y: scroll;
+		padding: 40px 20px;
+	}
+
+	.input-name {
+		width: 20vw;
+	}
+
+	.input-msg {
+		width: 72vw;
+	}
+</style>
 
 <body>
-	<h1>This is home page</h1>
-	<form method="post" action="/send">
-		<input type="text" name="user" id="name">
-		<input type="text" name="text" id="msg">
-		<button type="submit">Send</button>
+	<nav>
+		<h1>WriteX</h1>
+	</nav>
+	<div class="msgs">
+		<% if (locals.messages) { %>
+			<% messages.forEach(msg=> { %>
+				<div>
+					<h1>
+						<%=msg.user%>
+					</h1>
+					<p>
+						<%=msg.text%>
+					</p>
+				</div>
+				<% }) %>
+					<% } %>
+	</div>
+	<form class="input-form" method="post" action="/send">
+		<input class="input-name" type="text" name="user" id="name">
+		<input class="input-msg" type="text" name="text" id="msg">
+		<button type="submit"><i class="material-icons">&#xe163;</i></button>
 	</form>
-	<% if (locals.messages) { %>
-		<% messages.forEach(msg=> { %>
-			<div>
-				<h1>
-					<%=msg.user%>
-				</h1>
-				<p>
-					<%=msg.text%>
-				</p>
-			</div>
-			<% }) %>
-				<% } %>
+	<script>
+		function scrollToBottom() {
+			// For cross-browser compatibility
+			var body = document.body;
+			var html = document.documentElement;
+
+			// Get the height of the entire document
+			var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+			// Scroll to the bottom of the page
+			window.scrollTo({
+				top: height,
+				behavior: 'smooth' // Use 'auto' for instant scrolling without animation
+			});
+		}
+
+		// Call the function to scroll to the end when the page loads
+		window.onload = scrollToBottom;
+	</script>
 </body>
 
 </html>
