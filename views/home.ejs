@@ -9,10 +9,23 @@
 
 <body>
 	<h1>This is home page</h1>
-	<form method="post" action="#">
-		<input type="text" name="msg" id="msg">
+	<form method="post" action="/send">
+		<input type="text" name="user" id="name">
+		<input type="text" name="text" id="msg">
 		<button type="submit">Send</button>
 	</form>
+	<% if (locals.messages) { %>
+		<% messages.forEach(msg=> { %>
+			<div>
+				<h1>
+					<%=msg.user%>
+				</h1>
+				<p>
+					<%=msg.text%>
+				</p>
+			</div>
+			<% }) %>
+				<% } %>
 </body>
 
 </html>

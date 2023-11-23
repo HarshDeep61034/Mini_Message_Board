@@ -5,15 +5,20 @@ const msgSchema = new mongoose.Schema({
 		required: true,
 		type: String,
 	},
-	
+
 	user: {
 		required: true,
 		type: String
 	},
 
-	added: new Date()
+	added: {
+		dateadded: {
+			type: Date,
+			default: Date.now
+		}
+	}
 });
 
 const Msg = mongoose.model("Msg", msgSchema);
 
-module.exports = Msg
+module.exports = Msg;
